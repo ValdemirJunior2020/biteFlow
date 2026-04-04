@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "BiteFlow",
+    "slug": "biteflow-saas",
+    "scheme": "biteflow",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-notifications"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

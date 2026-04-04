@@ -1,0 +1,98 @@
+// File: firestore.rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function userDoc() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    function isSelf(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function isSuperAdmin() {
+      return signedIn()
+        && (
+          request.auth.token.email == 'YOU_SUPER_ADMIN_EMAIL_HERE'
+          || userDoc().data.role == 'super_admin'
+          || userDoc().data.isSuperAdmin == true
+        );
+    }
+
+    function isRestaurantOwner(ownerId) {
+      return signedIn() && request.auth.uid == ownerId;
+    }
+
+    match /users/{userId} {
+      allow create: if isSelf(userId);
+      allow read: if isSelf(userId) || isSuperAdmin();
+      allow update: if isSelf(userId) || isSuperAdmin();
+      allow delete: if isSuperAdmin();
+    }
+
+    match /restaurants/{restaurantId} {
+      allow read: if true;
+      allow create: if signedIn() && request.resource.data.ownerId == request.auth.uid;
+      allow update: if isSuperAdmin() || isRestaurantOwner(resource.data.ownerId);
+      allow delete: if isSuperAdmin();
+    }
+
+    match /menuItems/{itemId} {
+      allow read: if true;
+      allow create: if signedIn() && request.resource.data.restaurantId is string;
+      allow update, delete: if isSuperAdmin()
+        || (
+          signedIn()
+          && exists(/databases/$(database)/documents/restaurants/$(resource.data.restaurantId))
+          && get(/databases/$(database)/documents/restaurants/$(resource.data.restaurantId)).data.ownerId == request.auth.uid
+        );
+    }
+
+    match /addresses/{addressId} {
+      allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+      allow read, update, delete: if signedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    match /orders/{orderId} {
+      allow create: if signedIn() && request.resource.data.customerId == request.auth.uid;
+      allow read: if isSuperAdmin()
+        || (signedIn() && resource.data.customerId == request.auth.uid)
+        || (signedIn() && resource.data.ownerId == request.auth.uid);
+      allow update: if isSuperAdmin() || (signedIn() && resource.data.ownerId == request.auth.uid);
+      allow delete: if isSuperAdmin();
+    }
+
+    match /tracking/{orderId} {
+      allow read: if isSuperAdmin()
+        || (
+          signedIn()
+          && exists(/databases/$(database)/documents/orders/$(orderId))
+          && (
+            get(/databases/$(database)/documents/orders/$(orderId)).data.customerId == request.auth.uid
+            || get(/databases/$(database)/documents/orders/$(orderId)).data.ownerId == request.auth.uid
+          )
+        );
+      allow create, update: if isSuperAdmin()
+        || (
+          signedIn()
+          && exists(/databases/$(database)/documents/orders/$(orderId))
+          && get(/databases/$(database)/documents/orders/$(orderId)).data.ownerId == request.auth.uid
+        );
+      allow delete: if isSuperAdmin();
+    }
+
+    match /platformSettings/{docId} {
+      allow read: if signedIn();
+      allow write: if isSuperAdmin();
+    }
+
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isSuperAdmin();
+    }
+  }
+}

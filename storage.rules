@@ -1,0 +1,24 @@
+// File: storage.rules
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    match /restaurants/{ownerId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if signedIn() && request.auth.uid == ownerId;
+    }
+
+    match /users/{userId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if signedIn() && request.auth.uid == userId;
+    }
+
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
