@@ -1,7 +1,7 @@
 // File: firebase/storage.ts
 import * as ImagePicker from 'expo-image-picker';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { storage } from '@/firebase/config';
+import { storage } from '@/services/config';
 
 export async function pickImageUri() {
   const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();

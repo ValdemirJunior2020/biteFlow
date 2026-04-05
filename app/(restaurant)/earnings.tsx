@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 import { LoadingView } from '@/components/LoadingView';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { getRestaurantOrders } from '@/firebase/firestore';
+import { getRestaurantOrders } from '@/services/firestore';
 import { useAuthStore } from '@/store/auth-store';
 import { currency } from '@/lib/format';
 import type { Order } from '@/types';

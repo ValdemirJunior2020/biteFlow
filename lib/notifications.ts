@@ -3,7 +3,7 @@ import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 import { doc, setDoc } from 'firebase/firestore';
-import { db } from '@/firebase/config';
+import { db } from '@/services/config';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

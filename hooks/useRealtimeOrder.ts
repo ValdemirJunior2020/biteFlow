@@ -1,6 +1,6 @@
 // File: hooks/useRealtimeOrder.ts
 import { useEffect, useState } from 'react';
-import { subscribeToOrderTracking } from '@/firebase/firestore';
+import { subscribeToOrderTracking } from '@/services/firestore';
 import type { OrderTracking } from '@/types';
 
 export const useRealtimeOrder = (orderId?: string) => {

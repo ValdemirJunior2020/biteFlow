@@ -6,8 +6,8 @@ import { AppButton } from '@/components/AppButton';
 import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { getRestaurantsByOwner, saveMenuItem } from '@/firebase/firestore';
-import { pickImageUri, uploadImageAsync } from '@/firebase/storage';
+import { getRestaurantsByOwner, saveMenuItem } from '@/services/firestore';
+import { pickImageUri, uploadImageAsync } from '@/services/storage';
 import { useAuthStore } from '@/store/auth-store';
 
 export default function NewMenuItemScreen() {

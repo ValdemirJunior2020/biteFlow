@@ -30,9 +30,9 @@ export function RestaurantCard({ restaurant, onPress }: { restaurant: Restaurant
 }
 
 const styles = StyleSheet.create({
-  card: { borderRadius: 24, overflow: 'hidden', width: '48%' },
-  image: { width: '100%', height: 140 },
-  body: { padding: 12, gap: 6 },
-  title: { fontSize: 18, fontWeight: '800' },
+  card: { borderRadius: 20, overflow: 'hidden', flex: 1, minWidth: 0 },
+  image: { width: '100%', aspectRatio: 16 / 9 },
+  body: { padding: 14, gap: 6 },
+  title: { fontSize: 16, fontWeight: '700' },
   meta: { flexDirection: 'row', alignItems: 'center', gap: 6 }
 });

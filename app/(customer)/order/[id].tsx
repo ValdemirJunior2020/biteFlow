@@ -6,7 +6,7 @@ import { AppButton } from '@/components/AppButton';
 import { LoadingView } from '@/components/LoadingView';
 import { OrderStatusBadge } from '@/components/OrderStatusBadge';
 import { Screen } from '@/components/Screen';
-import { getCustomerOrders } from '@/firebase/firestore';
+import { getCustomerOrders } from '@/services/firestore';
 import { useAuthStore } from '@/store/auth-store';
 import type { Order } from '@/types';
 import { currency, shortDate } from '@/lib/format';

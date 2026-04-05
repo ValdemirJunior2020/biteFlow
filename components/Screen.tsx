@@ -18,5 +18,5 @@ export function Screen({ children, scroll = true }: { children: ReactNode; scrol
 
 const styles = StyleSheet.create({
   safe: { flex: 1 },
-  content: { padding: 18, gap: 16, paddingBottom: 42 }
+  content: { padding: 20, gap: 16, paddingBottom: 48 }
 });

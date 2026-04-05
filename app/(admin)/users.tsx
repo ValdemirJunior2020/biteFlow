@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 import { LoadingView } from '@/components/LoadingView';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { getAllUsers } from '@/firebase/firestore';
+import { getAllUsers } from '@/services/firestore';
 import type { AppUser } from '@/types';
 import { useTheme } from '@/hooks/useTheme';
 

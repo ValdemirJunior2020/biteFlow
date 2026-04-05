@@ -13,8 +13,8 @@ import {
   updateProfile,
   type User
 } from 'firebase/auth';
-import { auth } from '@/firebase/config';
-import { createUserProfile, getUserProfile, isSuperAdminEmail } from '@/firebase/firestore';
+import { auth } from '@/services/config';
+import { createUserProfile, getUserProfile, isSuperAdminEmail } from '@/services/firestore';
 import type { AppUser, UserRole } from '@/types';
 
 WebBrowser.maybeCompleteAuthSession();

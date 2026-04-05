@@ -7,7 +7,7 @@ import { EmptyState } from '@/components/EmptyState';
 import { LoadingView } from '@/components/LoadingView';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { getRestaurantOrders, getRestaurantsByOwner } from '@/firebase/firestore';
+import { getRestaurantOrders, getRestaurantsByOwner } from '@/services/firestore';
 import { currency } from '@/lib/format';
 import { useAuthStore } from '@/store/auth-store';
 import type { Order, Restaurant } from '@/types';

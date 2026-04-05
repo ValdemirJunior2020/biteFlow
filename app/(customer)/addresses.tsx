@@ -6,7 +6,7 @@ import { AppButton } from '@/components/AppButton';
 import { EmptyState } from '@/components/EmptyState';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { getAddresses, saveAddress } from '@/firebase/firestore';
+import { getAddresses, saveAddress } from '@/services/firestore';
 import { useTheme } from '@/hooks/useTheme';
 import { useAuthStore } from '@/store/auth-store';
 import type { AppAddress } from '@/types';

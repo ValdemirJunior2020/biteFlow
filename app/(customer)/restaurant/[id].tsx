@@ -6,7 +6,7 @@ import { AppButton } from '@/components/AppButton';
 import { FoodCard } from '@/components/FoodCard';
 import { LoadingView } from '@/components/LoadingView';
 import { Screen } from '@/components/Screen';
-import { getMenuByRestaurant, getRestaurant } from '@/firebase/firestore';
+import { getMenuByRestaurant, getRestaurant } from '@/services/firestore';
 import { useCartStore } from '@/store/cart-store';
 import type { MenuItem, Restaurant } from '@/types';
 import { useTheme } from '@/hooks/useTheme';
@@ -58,7 +58,7 @@ export default function RestaurantDetailsScreen() {
 }
 
 const styles = StyleSheet.create({
-  hero: { width: '100%', height: 220, borderRadius: 24 },
-  title: { fontSize: 30, fontWeight: '800' },
-  grid: { flexDirection: 'row', gap: 12, flexWrap: 'wrap', justifyContent: 'space-between' }
+  hero: { width: '100%', aspectRatio: 16 / 7, borderRadius: 20 },
+  title: { fontSize: 24, fontWeight: '800' },
+  grid: { flexDirection: 'row', gap: 12, flexWrap: 'wrap' }
 });

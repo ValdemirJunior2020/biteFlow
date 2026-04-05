@@ -1,15 +1,17 @@
 // File: app/(public)/login.tsx
 import { useEffect, useState } from 'react';
-import { Alert, Text, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import * as Google from 'expo-auth-session/providers/google';
 import { Link } from 'expo-router';
 import { AppButton } from '@/components/AppButton';
 import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { googleClientIds, loginWithEmail, loginWithFirebaseGoogleIdToken } from '@/firebase/auth';
+import { useTheme } from '@/hooks/useTheme';
+import { googleClientIds, loginWithEmail, loginWithFirebaseGoogleIdToken } from '@/services/auth';
 
 export default function LoginScreen() {
+  const { colors } = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -46,11 +48,28 @@ export default function LoginScreen() {
       <AppInput label="Password" value={password} onChangeText={setPassword} secureTextEntry />
       <AppButton label="Login" onPress={handleLogin} loading={loading} />
       <AppButton label="Continue with Google" variant="ghost" onPress={() => promptAsync()} />
-      <Link href="/(public)/forgot-password">Forgot password?</Link>
-      <View style={{ flexDirection: 'row', gap: 6 }}>
-        <Text>Need an account?</Text>
-        <Link href="/(public)/signup">Sign up</Link>
+
+      <View style={styles.footer}>
+        <Link href="/(public)/forgot-password" asChild>
+          <Pressable>
+            <Text style={[styles.link, { color: colors.primary }]}>Forgot password?</Text>
+          </Pressable>
+        </Link>
+        <View style={styles.row}>
+          <Text style={{ color: colors.mutedText }}>Need an account?</Text>
+          <Link href="/(public)/signup" asChild>
+            <Pressable>
+              <Text style={[styles.link, { color: colors.primary }]}>Sign up</Text>
+            </Pressable>
+          </Link>
+        </View>
       </View>
     </Screen>
   );
 }
+
+const styles = StyleSheet.create({
+  footer: { gap: 12, alignItems: 'center', marginTop: 8 },
+  row: { flexDirection: 'row', gap: 6, alignItems: 'center' },
+  link: { fontSize: 15, fontWeight: '600' }
+});

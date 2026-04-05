@@ -7,7 +7,7 @@ import { AppButton } from '@/components/AppButton';
 import { EmptyState } from '@/components/EmptyState';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { createOrderFromCart, getAddresses, getRestaurant } from '@/firebase/firestore';
+import { createOrderFromCart, getAddresses, getRestaurant } from '@/services/firestore';
 import { useTheme } from '@/hooks/useTheme';
 import { createPaymentIntent } from '@/lib/stripe';
 import { currency } from '@/lib/format';

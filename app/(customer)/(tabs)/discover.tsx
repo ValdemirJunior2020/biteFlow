@@ -8,7 +8,7 @@ import { SectionTitle } from '@/components/SectionTitle';
 import { RestaurantCard } from '@/components/RestaurantCard';
 import { LoadingView } from '@/components/LoadingView';
 import { CUISINES } from '@/lib/constants';
-import { getRestaurants } from '@/firebase/firestore';
+import { getRestaurants } from '@/services/firestore';
 import { useTheme } from '@/hooks/useTheme';
 import { getDistanceKm } from '@/lib/format';
 import type { Restaurant } from '@/types';

@@ -11,7 +11,7 @@ import { LoadingView } from '@/components/LoadingView';
 import { EmptyState } from '@/components/EmptyState';
 import { useTheme } from '@/hooks/useTheme';
 import { CUISINES } from '@/lib/constants';
-import { getRestaurants } from '@/firebase/firestore';
+import { getRestaurants } from '@/services/firestore';
 import { useCartStore } from '@/store/cart-store';
 import type { Restaurant } from '@/types';
 import { getDistanceKm } from '@/lib/format';
@@ -82,7 +82,7 @@ export default function CustomerHomeScreen() {
           {filtered.map((restaurant) => {
             const distanceKm = coords ? getDistanceKm(coords.latitude, coords.longitude, restaurant.location.latitude, restaurant.location.longitude) : null;
             return (
-              <View key={restaurant.id} style={{ width: '48%', gap: 6 }}>
+              <View key={restaurant.id} style={styles.gridItem}>
                 <RestaurantCard restaurant={restaurant} onPress={() => router.push(`/(customer)/restaurant/${restaurant.id}` as never)} />
                 {distanceKm !== null ? <Text style={{ color: colors.mutedText }}>{distanceKm.toFixed(1)} km away</Text> : null}
               </View>
@@ -102,14 +102,15 @@ export default function CustomerHomeScreen() {
 const styles = StyleSheet.create({
   headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   actions: { flexDirection: 'row', gap: 12 },
-  iconButton: { width: 46, height: 46, borderRadius: 23, alignItems: 'center', justifyContent: 'center' },
-  dot: { position: 'absolute', right: -2, top: -2, backgroundColor: '#FF8A2A', minWidth: 18, height: 18, borderRadius: 9, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4 },
+  iconButton: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
+  dot: { position: 'absolute', right: -3, top: -3, backgroundColor: '#FF8A2A', minWidth: 18, height: 18, borderRadius: 9, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4 },
   dotText: { color: '#fff', fontSize: 11, fontWeight: '700' },
-  searchBar: { minHeight: 58, borderRadius: 18, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 16, gap: 10 },
+  searchBar: { minHeight: 54, borderRadius: 16, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 16, gap: 10 },
   categories: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
-  categoryCard: { paddingHorizontal: 18, minHeight: 52, borderRadius: 18, alignItems: 'center', justifyContent: 'center' },
-  categoryText: { fontSize: 15, fontWeight: '700' },
-  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 14, justifyContent: 'space-between' },
-  banner: { borderRadius: 22, padding: 18, gap: 4 },
-  bannerTitle: { fontSize: 24, fontWeight: '800' }
+  categoryCard: { paddingHorizontal: 16, minHeight: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
+  categoryText: { fontSize: 14, fontWeight: '600' },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 14 },
+  gridItem: { flex: 1, minWidth: '45%', gap: 6 },
+  banner: { borderRadius: 20, padding: 16, gap: 4 },
+  bannerTitle: { fontSize: 20, fontWeight: '700' }
 });

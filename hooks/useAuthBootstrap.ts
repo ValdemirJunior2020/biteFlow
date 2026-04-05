@@ -1,6 +1,6 @@
 // C:\Users\Valdemir Goncalves\Desktop\pROJETUS-2026\BiteFlow-SaaS-Expo-Router-v3-fixed-icons\hooks\useAuthBootstrap.ts
 import { useEffect } from 'react';
-import { onAuthChange } from '@/firebase/auth';
+import { onAuthChange } from '@/services/auth';
 import { useAuthStore } from '@/store/auth-store';
 
 export const useAuthBootstrap = () => {

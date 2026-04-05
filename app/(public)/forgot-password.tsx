@@ -5,7 +5,7 @@ import { AppButton } from '@/components/AppButton';
 import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { forgotPassword } from '@/firebase/auth';
+import { forgotPassword } from '@/services/auth';
 
 export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('');

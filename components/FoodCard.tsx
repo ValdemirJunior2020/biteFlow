@@ -29,10 +29,10 @@ export function FoodCard({ item, onAdd }: { item: MenuItem; onAdd?: () => void }
 }
 
 const styles = StyleSheet.create({
-  card: { borderRadius: 22, overflow: 'hidden', width: '48%' },
-  image: { width: '100%', height: 116 },
-  body: { padding: 12, gap: 8 },
-  name: { fontSize: 17, fontWeight: '800' },
-  price: { fontSize: 16, fontWeight: '700' },
+  card: { borderRadius: 20, overflow: 'hidden', flex: 1, minWidth: 0 },
+  image: { width: '100%', aspectRatio: 4 / 3 },
+  body: { padding: 14, gap: 8 },
+  name: { fontSize: 15, fontWeight: '700' },
+  price: { fontSize: 15, fontWeight: '700' },
   row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }
 });

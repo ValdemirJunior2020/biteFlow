@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     gap: 10,
-    borderWidth: 1
+    borderWidth: 1,
+    alignSelf: 'stretch',
+    paddingHorizontal: 20
   },
   text: { fontSize: 16, fontWeight: '700' }
 });

@@ -5,8 +5,8 @@ import { AppButton } from '@/components/AppButton';
 import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { getRestaurantsByOwner, saveRestaurant } from '@/firebase/firestore';
-import { pickImageUri, uploadImageAsync } from '@/firebase/storage';
+import { getRestaurantsByOwner, saveRestaurant } from '@/services/firestore';
+import { pickImageUri, uploadImageAsync } from '@/services/storage';
 import { useAuthStore } from '@/store/auth-store';
 import type { Restaurant } from '@/types';
 

@@ -15,7 +15,7 @@ import {
   updateDoc,
   where
 } from 'firebase/firestore';
-import { db } from '@/firebase/config';
+import { db } from '@/services/config';
 import { PLATFORM_COMMISSION_PERCENT, TAX_RATE } from '@/lib/constants';
 import type { AppAddress, AppUser, CartItem, MenuItem, Order, OrderTracking, Restaurant } from '@/types';
 

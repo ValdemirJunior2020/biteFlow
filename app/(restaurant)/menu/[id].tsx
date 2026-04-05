@@ -6,7 +6,7 @@ import { AppButton } from '@/components/AppButton';
 import { AppInput } from '@/components/AppInput';
 import { LoadingView } from '@/components/LoadingView';
 import { Screen } from '@/components/Screen';
-import { getMenuByRestaurant, getRestaurantsByOwner, saveMenuItem } from '@/firebase/firestore';
+import { getMenuByRestaurant, getRestaurantsByOwner, saveMenuItem } from '@/services/firestore';
 import { useAuthStore } from '@/store/auth-store';
 import type { MenuItem } from '@/types';
 

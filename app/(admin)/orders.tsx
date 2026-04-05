@@ -5,7 +5,7 @@ import { LoadingView } from '@/components/LoadingView';
 import { OrderStatusBadge } from '@/components/OrderStatusBadge';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { getAllOrders } from '@/firebase/firestore';
+import { getAllOrders } from '@/services/firestore';
 import { currency } from '@/lib/format';
 import type { Order } from '@/types';
 import { useTheme } from '@/hooks/useTheme';

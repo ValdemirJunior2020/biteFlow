@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { AppButton } from '@/components/AppButton';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { logout } from '@/firebase/auth';
+import { logout } from '@/services/auth';
 import { useAuthStore } from '@/store/auth-store';
 
 export default function RestaurantSettingsScreen() {

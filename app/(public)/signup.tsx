@@ -6,7 +6,7 @@ import { AppButton } from '@/components/AppButton';
 import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { signupWithEmail } from '@/firebase/auth';
+import { signupWithEmail } from '@/services/auth';
 import { useTheme } from '@/hooks/useTheme';
 import type { UserRole } from '@/types';
 

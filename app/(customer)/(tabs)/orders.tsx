@@ -7,7 +7,7 @@ import { LoadingView } from '@/components/LoadingView';
 import { OrderStatusBadge } from '@/components/OrderStatusBadge';
 import { Screen } from '@/components/Screen';
 import { SectionTitle } from '@/components/SectionTitle';
-import { getCustomerOrders } from '@/firebase/firestore';
+import { getCustomerOrders } from '@/services/firestore';
 import { useTheme } from '@/hooks/useTheme';
 import { currency, shortDate } from '@/lib/format';
 import { useAuthStore } from '@/store/auth-store';
