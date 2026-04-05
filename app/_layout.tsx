@@ -1,4 +1,4 @@
-// File: app/_layout.tsx
+// C:\Users\Valdemir Goncalves\Desktop\pROJETUS-2026\BiteFlow-SaaS-Expo-Router-v3-fixed-icons\app\_layout.tsx
 import 'react-native-gesture-handler';
 import { useEffect, useMemo } from 'react';
 import { Slot, useRootNavigationState, useRouter, useSegments } from 'expo-router';
@@ -7,18 +7,30 @@ import { StripeProvider } from '@stripe/stripe-react-native';
 import Constants from 'expo-constants';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
+import { Text, View, ActivityIndicator } from 'react-native';
 import { useAuthBootstrap } from '@/hooks/useAuthBootstrap';
 import { useAuthStore } from '@/store/auth-store';
 import { registerPushToken } from '@/lib/notifications';
 
 SplashScreen.preventAutoHideAsync().catch(() => undefined);
 
+function AppShell() {
+  return (
+    <>
+      <StatusBar style="auto" />
+      <Slot />
+    </>
+  );
+}
+
 export default function RootLayout() {
   useAuthBootstrap();
+
   const router = useRouter();
   const rootState = useRootNavigationState();
   const segments = useSegments();
   const { ready, firebaseUser, profile } = useAuthStore();
+
   const publishableKey = Constants.expoConfig?.extra?.stripePublishableKey as string | undefined;
 
   const segmentRoot = useMemo(() => String(segments[0] ?? ''), [segments]);
@@ -43,13 +55,16 @@ export default function RootLayout() {
 
     if (!profile) return;
 
-    registerPushToken(firebaseUser.uid).catch(() => undefined);
+    registerPushToken(firebaseUser.uid).catch((error) => {
+      console.log('registerPushToken error:', error);
+    });
 
-    const target = profile.isSuperAdmin || profile.role === 'super_admin'
-      ? '/(admin)/dashboard'
-      : profile.role === 'restaurant_owner'
-        ? '/(restaurant)/dashboard'
-        : '/(customer)/(tabs)';
+    const target =
+      profile.isSuperAdmin || profile.role === 'super_admin'
+        ? '/(admin)/dashboard'
+        : profile.role === 'restaurant_owner'
+          ? '/(restaurant)/dashboard'
+          : '/(customer)/(tabs)';
 
     if (isPublicRoute) {
       router.replace(target as never);
@@ -66,14 +81,39 @@ export default function RootLayout() {
     }
   }, [ready, rootState?.key, firebaseUser, profile, isPublicRoute, isAdminRoute, isRestaurantRoute, router]);
 
-  if (!ready) return null;
+  if (!ready) {
+    return (
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#ffffff',
+            paddingHorizontal: 24
+          }}
+        >
+          <ActivityIndicator size="large" color="#f97316" />
+          <Text style={{ marginTop: 16, fontSize: 24, fontWeight: '700', color: '#111827' }}>
+            BiteFlow
+          </Text>
+          <Text style={{ marginTop: 8, fontSize: 14, color: '#6b7280', textAlign: 'center' }}>
+            Loading app...
+          </Text>
+        </View>
+      </GestureHandlerRootView>
+    );
+  }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <StripeProvider publishableKey={publishableKey || 'pk_test_replace_me'}>
-        <StatusBar style="auto" />
-        <Slot />
-      </StripeProvider>
+      {publishableKey ? (
+        <StripeProvider publishableKey={publishableKey}>
+          <AppShell />
+        </StripeProvider>
+      ) : (
+        <AppShell />
+      )}
     </GestureHandlerRootView>
   );
 }

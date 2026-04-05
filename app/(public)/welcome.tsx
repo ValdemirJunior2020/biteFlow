@@ -1,33 +1,21 @@
-// File: app/(public)/welcome.tsx
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { router } from 'expo-router';
-import { AppButton } from '@/components/AppButton';
-import { Screen } from '@/components/Screen';
-import { SectionTitle } from '@/components/SectionTitle';
-import { useTheme } from '@/hooks/useTheme';
+// C:\Users\Valdemir Goncalves\Desktop\pROJETUS-2026\BiteFlow-SaaS-Expo-Router-v3-fixed-icons\app\(public)\welcome.tsx
+import { View, Text } from 'react-native';
 
 export default function WelcomeScreen() {
-  const { colors } = useTheme();
-
   return (
-    <Screen scroll={false}>
-      <View style={styles.hero}>
-        <Image
-          source={{ uri: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1500&auto=format&fit=crop' }}
-          style={styles.image}
-        />
-      </View>
-      <SectionTitle title="BiteFlow" subtitle="Multi-tenant food delivery SaaS for customers, restaurants, and platform admins." />
-      <Text style={{ color: colors.mutedText, fontSize: 15, lineHeight: 22 }}>
-        Order fast, manage restaurants, and run your platform with subscriptions, commissions, analytics, and live tracking.
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#ffffff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 24
+      }}
+    >
+      <Text style={{ fontSize: 30, fontWeight: '800', color: '#111827' }}>BiteFlow</Text>
+      <Text style={{ marginTop: 12, fontSize: 16, color: '#6b7280', textAlign: 'center' }}>
+        Welcome screen is rendering correctly.
       </Text>
-      <AppButton label="Login" onPress={() => router.push('/(public)/login')} />
-      <AppButton label="Create account" variant="ghost" onPress={() => router.push('/(public)/signup')} />
-    </Screen>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  hero: { borderRadius: 28, overflow: 'hidden' },
-  image: { width: '100%', height: 300, borderRadius: 28 }
-});
